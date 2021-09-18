@@ -1,0 +1,51 @@
+
+<html>
+<head>
+<title>картинка</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+</head>
+<body>
+<p><h1 align="center"> {{ title }} </h1></p>
+<div class="container">
+<div class="row">
+    <p>
+        <h2>{{ title2 }}</h2>
+    </p>
+        <h4>{{ err_form }}</h4>
+    {% if filename %}
+    <form method="post" action="/index" enctype="multipart/form-data">
+     <dl>
+         <p>
+              <li> {{ colour_wb }}</li>
+              <li> Введите шестнадцатеричное значение цвета(недолжно начинаться с #)</li>
+              <form method = "post" action = "/index2" enctype="multipart/form-data">
+                  <input type="text" name = "hex" class="form-control" autocomplete="off" required pattern="[0-9A-Fa-f]{6}">
+                  <h6>  </h6>
+                  <input type="submit" value="подсчитать" class="'btn btn-info">
+              </form>
+         </p>
+         <div>
+            <img src="{{ url_for('display_image', filename=filename) }}">
+         </div>
+     </dl>
+    </form>
+    {% endif %}
+    {% if count_color %}
+        <h3> {{ count_color }} </h3>
+    {% endif %}
+    <form method="post" action="/" enctype="multipart/form-data">
+        <dl>
+            <p>
+                <input type="file" name="file" class="form-control" autocomplete="off" required>
+            </p>
+        </dl>
+        <p>
+            <input type="submit" value="Отправить картинку" class="btn btn-info">
+        </p>
+    </form>
+
+</div>
+</div>
+</body>
+</html>
